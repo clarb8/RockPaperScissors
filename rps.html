@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Rock Paper Scissors</title>
+    </head>
+    <body>
+
+      <script>
+        function computerPlay() {
+          let play = Math.floor(Math.random() * (3-1 + 1)) + 1;
+          switch (play){
+            case 1:
+              return "Rock";
+            break;
+            case 2:
+              return "Paper";
+            break;
+            case 3:
+              return "Scissors";
+            break;
+          }
+        }
+        function gameRound(playerSelection, computerSelection){
+          let player = playerSelection.toLowerCase();
+          let comp = computerSelection.toLowerCase();
+          if (player === comp) {
+            return "Tie";
+          } else if (player === "rock" && comp === "scissors") {
+            return "You Win! Rock beats Scissors!";
+          } else if (player === "scissors" && comp === "paper") {
+            return "You Win! Scissors beats Paper";
+          } else if (player === "paper" && comp === "rock") {
+            return "You Win! Paper beats Rock";
+          } else if (comp === "rock" && player === "scissors") {
+            return "You Lose! Rock beats Scissors";
+          } else if (comp === "scissors" && player === "paper") {
+            return "You Lose! Scissors beats Paper";
+          } else if (comp === "paper" && player === "rock") {
+            return "You Lose! Paper beats Rock";
+          }
+        }
+
+        function game(rnd) {
+          let roundCnt = 0;
+          let playerScore = 0;
+          let compScore = 0;
+          
+          for (;roundCnt <= 5;) {
+            let rndResult = gameRound(prompt("Please enter Rock, Paper, or Scissors"), computerPlay());
+            if (rndResult.startsWith("You Lose")) {
+              compScore++;
+              roundCnt++;
+              console.log(rndResult);
+            } else if (rndResult.startsWith("You Win")) {
+              playerScore++;
+              roundCnt++;
+              console.log(rndResult);
+            } else {
+              continue;
+            }
+          }
+          if (roundCnt === 5) {
+            if (playerScore > compScore) {
+              return "Player Wins!"
+            } else {
+              return "Computer Wins! Look out!"
+            }
+          }
+        }
+
+        console.log(game());
+      </script>
+    </body>
+  </html>
